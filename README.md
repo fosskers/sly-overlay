@@ -9,6 +9,15 @@ whatever is usually bound to `sly-eval-defun`.
 
 There is otherwise no other setup necessary for using the library.
 
-[sly]: https://github.com/joaotavora/sly
+### Contributing
+
+If you'd like to contribute code, please send patches to the mailing list.
+
+- [Mailing List][list]
+- [Issues][bugs]
+
+[sly]:   https://github.com/joaotavora/sly
 [cider]: https://github.com/clojure-emacs/cider
-[eros]: https://github.com/xiongtx/eros
+[eros]:  https://github.com/xiongtx/eros
+[list]:  https://lists.sr.ht/~fosskers/sly-overlay
+[bugs]:  https://todo.sr.ht/~fosskers/sly-overlay
