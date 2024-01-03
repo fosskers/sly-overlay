@@ -5,11 +5,11 @@
 ;; Author: Colin Woodbury <colin@fosskers.ca>
 ;; Maintainer: Colin Woodbury <colin@fosskers.ca>
 ;; Created: January 01, 2024
-;; Modified: January 01, 2024
+;; Modified: January 03, 2024
 ;; Version: 1.0.0
 ;; Keywords: lisp
 ;; Homepage: https://github.com/fosskers/sly-overlay
-;; Package-Requires: ((emacs "24.3"))
+;; Package-Requires: ((emacs "24.4"))
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
@@ -216,10 +216,15 @@ This function also removes itself from `pre-command-hook'."
 
 (defun sly-overlay--eval-overlay (value point)
   "Make overlay for VALUE at POINT."
-  (sly-overlay--make-result-overlay (format "%S" value)
+  (sly-overlay--make-result-overlay (format "%s" value)
     :where point
     :duration sly-overlay-eval-result-duration)
   value)
+
+(defun sly-overlay--defun-at-point ()
+  "Get the sexp at point as a string."
+  (pcase (sly-region-for-defun-at-point)
+    (`(,start ,end) (string-trim (buffer-substring-no-properties start end)))))
 
 ;; --- API --- ;;
 
@@ -239,8 +244,7 @@ This function also removes itself from `pre-command-hook'."
 (defun sly-overlay-eval-defun ()
   "Wrapper for `sly-eval-defun' that overlays results."
   (interactive)
-  (let ((result (sly-eval-defun)))
-    (message "HEY COLIN: %s" result)
+  (let ((result (sly-eval `(slynk:pprint-eval ,(sly-overlay--defun-at-point)))))
     (sly-overlay--eval-overlay
      result
      (save-excursion
