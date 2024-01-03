@@ -67,22 +67,6 @@ If the symbol `command', they're erased before the next command."
           (const :tag "Last indefinitely" nil))
   :package-version '(sly-overlay "1.0.0"))
 
-(defcustom sly-overlay-inspect-hooks '()
-  "Hooks to run after sly-overlay-inspect buffer is opened.
-
-Especially useful for disabling stuff, like flycheck etc."
-  :group 'sly-overlay
-  :type 'hook
-  :package-version '(sly-overlay "1.0.0"))
-
-;; --- Internals --- ;;
-
-(defvar sly-overlay--inspect-buffer-name "*sly-overlay inspect*"
-  "Buffer name for showing pretty printed results.")
-
-(defvar sly-overlay--last-result nil
-  "Result of the last `sly-overlay-eval-*' call.")
-
 ;; --- Overlay logic --- ;;
 
 (defun sly-overlay--make-overlay (l r type &rest props)
@@ -229,20 +213,8 @@ This function also removes itself from `pre-command-hook'."
 ;; --- API --- ;;
 
 ;;;###autoload
-(defun sly-overlay-eval-last-sexp ()
-  "Wrapper for `sly-eval-last-expression' that overlays results."
-  (interactive "P")
-  (let ((result (sly-eval-last-expression)))
-    (setq sly-overlay--last-result result)
-    (when (get-buffer sly-overlay--inspect-buffer-name)
-      (sly-overlay-inspect-last-result))
-    (sly-overlay--eval-overlay
-     result
-     (point))))
-
-;;;###autoload
 (defun sly-overlay-eval-defun ()
-  "Wrapper for `sly-eval-defun' that overlays results."
+  "Evaluate the form at point and overlays the results."
   (interactive)
   (let ((result (sly-eval `(slynk:pprint-eval ,(sly-overlay--defun-at-point)))))
     (sly-overlay--eval-overlay
@@ -250,19 +222,6 @@ This function also removes itself from `pre-command-hook'."
      (save-excursion
        (end-of-defun)
        (point)))))
-
-(defun sly-overlay-inspect-last-result ()
-  "Inspect the result of last `sly-overlay-eval-'."
-  (interactive)
-  (when sly-overlay--last-result
-    (get-buffer-create sly-overlay--inspect-buffer-name)
-    (let ((print-length nil)
-          (print-level nil))
-      (pp-display-expression sly-overlay--last-result sly-overlay--inspect-buffer-name)
-      (with-current-buffer (get-buffer-create sly-overlay--inspect-buffer-name)
-        (run-hooks 'sly-overlay-inspect-hooks)))
-    (unless (get-buffer-window sly-overlay--inspect-buffer-name)
-      (switch-to-buffer-other-window sly-overlay--inspect-buffer-name))))
 
 (provide 'sly-overlay)
 ;;; sly-overlay.el ends here
