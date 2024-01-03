@@ -7,7 +7,18 @@ Lisp evaluation results directly into the buffer in the spirit of [CIDER][cider]
 The primary function to call is `sly-overlay-eval-defun`, which can be bound to
 whatever is usually bound to `sly-eval-defun`.
 
-There is otherwise no other setup necessary for using the library.
+There is otherwise no other special setup necessary for using the library.
+
+### Installation
+
+`sly-overlay` is not yet in MELPA.
+
+#### Doom Emacs
+
+```
+(package! sly-overlay
+  :recipe (:host sourcehut :repo "fosskers/sly-overlay"))
+```
 
 ### Contributing
 
