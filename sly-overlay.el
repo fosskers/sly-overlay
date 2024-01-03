@@ -214,14 +214,15 @@ This function also removes itself from `pre-command-hook'."
 
 ;;;###autoload
 (defun sly-overlay-eval-defun ()
-  "Evaluate the form at point and overlays the results."
+  "Evaluate the form at point and overlay the results."
   (interactive)
   (let ((result (sly-eval `(slynk:pprint-eval ,(sly-overlay--defun-at-point)))))
     (sly-overlay--eval-overlay
      result
      (save-excursion
        (end-of-defun)
-       (point)))))
+       (point)))
+    (message "%s" result)))
 
 (provide 'sly-overlay)
 ;;; sly-overlay.el ends here
