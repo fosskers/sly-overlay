@@ -5,11 +5,11 @@
 ;; Author: Colin Woodbury <colin@fosskers.ca>
 ;; Maintainer: Colin Woodbury <colin@fosskers.ca>
 ;; Created: January 01, 2024
-;; Modified: January 04, 2024
+;; Modified: January 08, 2024
 ;; Version: 1.0.0
 ;; Keywords: lisp
 ;; Homepage: https://git.sr.ht/~fosskers/sly-overlay
-;; Package-Requires: ((emacs "24.4"))
+;; Package-Requires: ((emacs "24.4") (sly "1.0"))
 ;; SPDX-License-Identifier: LGPL-3.0-or-later
 ;;
 ;; This file is not part of GNU Emacs.
@@ -203,10 +203,9 @@ This function also removes itself from `pre-command-hook'."
 
 (defun sly-overlay--eval-overlay (value point)
   "Make overlay for VALUE at POINT."
-  (sly-overlay--make-result-overlay
-   (format "%s" value)
-   :where point
-   :duration sly-overlay-eval-result-duration)
+  (sly-overlay--make-result-overlay (format "%s" value)
+    :where point
+    :duration sly-overlay-eval-result-duration)
   value)
 
 (defun sly-overlay--defun-at-point ()
