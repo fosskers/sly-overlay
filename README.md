@@ -11,7 +11,7 @@ There is otherwise no other special setup necessary for using the library.
 
 ### Installation
 
-`sly-overlay` is not yet in MELPA.
+`sly-overlay` is available on MELPA.
 
 #### Doom Emacs
 
