@@ -8,7 +8,7 @@
 ;; Modified: August 28, 2024
 ;; Version: 1.0.1
 ;; Keywords: lisp
-;; Homepage: https://git.sr.ht/~fosskers/sly-overlay
+;; Homepage: https://github.com/fosskers/sly-overlay
 ;; Package-Requires: ((emacs "24.4") (sly "1.0"))
 ;; SPDX-License-Identifier: LGPL-3.0-or-later
 ;;
