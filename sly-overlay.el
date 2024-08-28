@@ -5,8 +5,8 @@
 ;; Author: Colin Woodbury <colin@fosskers.ca>
 ;; Maintainer: Colin Woodbury <colin@fosskers.ca>
 ;; Created: January 01, 2024
-;; Modified: January 08, 2024
-;; Version: 1.0.0
+;; Modified: August 28, 2024
+;; Version: 1.0.1
 ;; Keywords: lisp
 ;; Homepage: https://git.sr.ht/~fosskers/sly-overlay
 ;; Package-Requires: ((emacs "24.4") (sly "1.0"))
@@ -35,7 +35,7 @@
 
 (defcustom sly-overlay-eval-result-prefix "=> "
   "The prefix displayed in the minibuffer before a result value."
-  :group 'slay-overlay
+  :group 'sly-overlay
   :type 'string
   :package-version '(sly-overlay "1.0.0"))
 
