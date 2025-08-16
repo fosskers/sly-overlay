@@ -15,8 +15,13 @@ There is otherwise no other special setup necessary for using the library.
 
 ** Doom Emacs
 
+=sly-overlay= is already incorporated into Doom and is the default binding for =SPC m e d=.
+
+** Straight
+
+Consider also this recipe:
+
 #+begin_src emacs-lisp
 (package! sly-overlay
-  :recipe (:host sourcehut :repo "fosskers/sly-overlay"))
+  :recipe (:host github :repo "fosskers/sly-overlay"))
 #+end_src
-
